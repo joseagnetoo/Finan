@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="./IMAGES/iconWallet.png" type="image/png">
+    <title>FINAN - Seu Controle Financeiro</title>
     <!--STYLES LOCAL-->
     <link rel="stylesheet" href="./css/index.css">
     <!--STYLES LOCAL-->
@@ -22,7 +23,7 @@
 ?>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">FINAN</a>
+      <a class="navbar-brand" href="#"> <img src="./IMAGES/iconWallet.png" width="35" alt=""> FINAN</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,7 +35,7 @@
             <a class="nav-link" href="#">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">REMITADA PROGRAMADA</a>
+            <a class="nav-link" href="./pages/RetiradaProgramada.php">REMITADA PROGRAMADA</a>
           </li>
         </ul>
       </div>
@@ -44,14 +45,14 @@
     <div class="container container-preco">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="d-flex justify-content-center h1-preco"> <span style="font-size: 30px; margin-top: 30px; margin-right: 10px;">R$</span><?= $exibValor['valor']; ?></h1>
+                <h1 class="d-flex justify-content-center h1-preco"> <span style="font-size: 30px; margin-top: 30px; margin-right: 10px;">R$</span><?= number_format($exibValor['valor'],2,",",".") ?></h1>
             </div>
             <div class="col-sm-2"></div>
             <div class="col-sm-4">
-              <button class="btn-adicionar" data-toggle="modal" data-target="#ExemploModalCentralizado">TESTE</button>
+              <button class="btn-adicionar" data-toggle="modal" data-target="#ExemploModalCentralizado">ADICIONAR</button>
             </div>
             <div class="col-sm-4">
-              <button class="btn-remover" data-toggle="modal" data-target="#ExemploModalRemover" >TESTE</button>
+              <button class="btn-remover" data-toggle="modal" data-target="#ExemploModalRemover">RETIRAR</button>
             </div>
             <div class="col-sm-2"></div>
         </div>
@@ -60,7 +61,7 @@
       <div class="container">
         <div class="row">
           <?php
-             $consultaValorMod=$conexao->query("SELECT * FROM ValorMod ORDER BY id DESC");
+             $consultaValorMod=$conexao->query("SELECT * FROM ValorMod ORDER BY id DESC LIMIT 10");
              while ($exibValorMod=$consultaValorMod->fetch(PDO::FETCH_ASSOC)){
           ?>
               <div class="col-sm-1"></div>
@@ -78,7 +79,7 @@
 </main>
 <footer class="py-4 bg-dark flex-shrink-0 fixed-bottom">
     <div class="container text-center">
-      <a href="https://bootstrapious.com/snippets" class="text-muted">Bootstrap snippet by Bootstrapious</a>
+      <a href="https://bootstrapious.com/snippets" class="text-muted">TODOS OS DIREITOS RESERVADOS A JOSE ANTONIO GUIMARÃES NETO</a>
     </div>
 </footer>
 <!-- Modal Adicionar -->
