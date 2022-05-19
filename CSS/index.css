@@ -1,0 +1,79 @@
+.nav-link{
+    color: white;
+}
+.container-preco{
+    margin-top: 100px;
+}
+.h1-preco{
+    font-size: 60px;
+    font-weight: bold;
+}
+.btn-adicionar{
+    background-color: green;
+    margin-top: 40px;
+    border: solid 1px black;
+    color: white;
+    width: 100%;
+}
+.btn-remover{
+    background-color: red;
+    margin-top: 40px;
+    border: solid 1px black;
+    color: white;
+    width: 100%;
+}
+.headerAdicionar{
+    background-color: green;
+}
+.footerAdicionar{
+    background-color: green; 
+}
+.headerRemover{
+    background-color: red;
+}
+.footerRemover{
+    background-color: red;
+}
+.btnRemove{
+    width: 28%;
+    background-color: red;
+    border: solid 1px black;
+    color: white;
+}
+.modal-title{
+    color: white;
+}
+.btnAdd{
+    width: 28%;
+    background-color: green;
+    border: solid 1px black;
+    color: white;
+}
+.close{
+    color: white;
+}
+.historico{
+    width: 100%;
+    border-radius: 50px;
+    min-height: 400px;
+    height: 100%;
+    background-color: rgb(114, 114, 114);
+    margin-top: 40px;
+}
+.code {
+    color: #665;
+    background: #fff;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+}
+.modoValor{
+    font-weight: bold;
+    font-size: 25px;
+}
+.obcervacaoValor{
+    font-size: 20px;
+}
+.precoValor{
+    font-size: 28px;
+    font-weight: bold;
+}
