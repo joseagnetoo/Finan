@@ -8,6 +8,7 @@
     <title>FINAN - Seu Controle Financeiro</title>
     <!--STYLES LOCAL-->
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/login.css">
     <!--STYLES LOCAL-->
     <!-- BootStrap CDN -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -19,14 +20,9 @@
 <header>
 <?php
 session_start();
-include "../COMPONENTS/conexao.php";
-
-if (empty($_SESSION['id'])){
-  header('location: ./PAGES/login.php');
-}
 ?>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="../index.php"> <img src="../IMAGES/iconWallet.png" width="35" alt=""> FINAN</a>
+      <a class="navbar-brand" href="#"> <img src="../IMAGES/iconWallet.png" width="35" alt=""> FINAN</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,10 +30,10 @@ if (empty($_SESSION['id'])){
         <ul class="navbar-nav mr-auto">
         </ul>
         <ul class="navbar-nav mt-2 mt-md-0">
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="../index.php">HOME</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="../pages/RetiradaProgramada.php">REMITADA PROGRAMADA</a>
           </li>
           <li class="nav-item active">
@@ -67,25 +63,42 @@ if (empty($_SESSION['id'])){
     <div class="container">
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6" style="  min-height: 100%;  min-height: 100vh; display: flex; align-items: center;">
-               <form action="../SCRIPTS/DataProgramada.php" method="post">
-                   <label for="" style="width: 100%">Valor</label>
-                   <input type="numeric" name="valor" style="width: 100%" />
-                   <label for="" style="width: 100%">Obcervacao</label>
-                   <input type="text" name="Obcervacao" style="width: 100%">
-                   <label for="" style="width: 100%">DATA</label>
-                   <input type="date" name="dataProg" name="" id="" style="width: 100%">
-                   <button type="submit" class="btnDataProg">CADASTRAR</button>
-               </form> 
-            </div>
+                <div class="col-sm-6">
+                    <div class="wrapper fadeInDown">
+                        <div id="formContent">
+                            <!-- Tabs Titles -->
+
+                            <!-- Icon -->
+                            <div class="fadeIn first">
+                            <h2><img src="../IMAGES/iconWallet.png" style="width: 40px" id="icon" alt="User Icon" /> FAÇA LOGIN</h2>
+                            </div>
+
+                            <!-- Login Form -->
+                            <form method="post" action="../SCRIPTS/LOGIN.php">
+                            <input type="text" id="login" class="fadeIn second" name="email" placeholder="username">
+                            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                            <input type="submit" class="fadeIn fourth" value="Log In">
+                            </form>
+
+                            <!-- Remind Passowrd -->
+                            <div id="formFooter">
+                            <a class="underlineHover" href="./register.php">Registrar-se</a>
+                            </div>
+
+                            </div>
+                        </div>
+                </div>
             <div class="col-sm-3"></div>
         </div>
     </div>
-</main>
+</main>    
 <footer class="py-4 bg-dark flex-shrink-0 fixed-bottom">
     <div class="container text-center">
       <a href="https://bootstrapious.com/snippets" class="text-muted">TODOS OS DIREITOS RESERVADOS A JOSE ANTONIO GUIMARÃES NETO</a>
     </div>
 </footer>
+<!--BOOTSTRAP JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

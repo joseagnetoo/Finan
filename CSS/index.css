@@ -80,6 +80,7 @@
 }
 .obcervacaoValor{
     font-size: 20px;
+    padding-top: -10px;
 }
 .precoValor{
     font-size: 28px;
@@ -95,3 +96,18 @@
     border-radius: 5px;
     cursor: pointer;
 }
+@media (min-width: 468px) {
+    .barra{
+        display: none;
+    }
+}
+@media (min-width: 768px) {
+.barra{
+    display: none;
+}
+}
+@media (min-width: 1200px) {
+    .barra{
+        display: none;
+    }
+    }

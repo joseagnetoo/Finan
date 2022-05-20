@@ -17,9 +17,34 @@
 </head>
 <body>
 <?php
+ session_start();
+ if (empty($_SESSION['id'])){
+  header('location: ./PAGES/login.php');
+}
  include "./COMPONENTS/conexao.php";
- $consultaValor=$conexao->query("SELECT valor FROM ValorAtual ORDER BY id DESC");
+ $consultaValor=$conexao->query("SELECT valor FROM ValorAtual WHERE id_user = '$_SESSION[id]' ORDER BY id DESC");
  $exibValor=$consultaValor->fetch(PDO::FETCH_ASSOC);
+ $valorAtual = $exibValor['valor'];
+
+ $consultaValorDataProg=$conexao->query("SELECT * FROM ValorRetProg WHERE ativo = 1 AND id_user = '$_SESSION[id]'");
+
+ while ($exibValorDataProg=$consultaValorDataProg->fetch(PDO::FETCH_ASSOC)){
+  $idDataReg = $exibValorDataProg['id'];
+  $data = date('Y-m-d');
+  $exibValorDataProg['data'];
+  $modo = "RETIRADA PROGRAMADA!";
+  $vlr =  $valorAtual - $exibValorDataProg['valor'];
+  $valorRetirado = $exibValorDataProg['valor'];
+  $obcervacao = $exibValorDataProg['obcervacao'];
+
+  if ($data == $exibValorDataProg['data']){
+    $inserir=$conexao->query("INSERT INTO ValorAtual (valor) VALUES ('$vlr') WHERE id_user = '$_SESSION[id]'");
+    $inserirMod=$conexao->query("INSERT INTO ValorMod (valor, modo, data, obcervacao, status) VALUES ('$valorRetirado', '$modo', '$data', '$obcervacao', '1') WHERE id_user = '$_SESSION[id]'");
+
+    $update=$conexao->query("UPDATE ValorRetProg SET ativo = 0 WHERE id = $idDataReg WHERE id_user = '$_SESSION[id]'");
+  }
+ } 
+
 ?>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -37,6 +62,25 @@
           <li class="nav-item">
             <a class="nav-link" href="./pages/RetiradaProgramada.php">REMITADA PROGRAMADA</a>
           </li>
+          <li class="nav-item active barra">
+            <a class="nav-link">|</a>
+          </li>
+          <?php  if (empty($_SESSION['id'])) { ?>
+            <li class="nav-item ">
+              <a class="nav-link" href="./PAGES/login.php" style="margin-right: 30px">Logar / Registrar</a>
+            </li>
+          <?php }else{
+             $consultaUser=$conexao->query("SELECT * FROM usuarios WHERE id = '$_SESSION[id]'");
+             $exibeUser=$consultaUser->fetch(PDO::FETCH_ASSOC);
+            ?>
+            <li class="nav-item dropdown" style="margin-right: 100px">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Olá <?= $exibeUser['usuario']; ?></a>
+            <div class="dropdown-menu" aria-labelledby="dropdown03" style="padding-right: 30px">
+              <a class="dropdown-item" href="./COMPONENTS/logoff.php">SAIR</a>
+            </div>
+          </li>
+          </div>
+          <?php } ?>  
         </ul>
       </div>
     </nav>
@@ -61,15 +105,14 @@
       <div class="container">
         <div class="row">
           <?php
-             $consultaValorMod=$conexao->query("SELECT * FROM ValorMod ORDER BY id DESC LIMIT 10");
+             $consultaValorMod=$conexao->query("SELECT * FROM ValorMod WHERE id_user = $_SESSION[id] ORDER BY id DESC LIMIT 6");
              while ($exibValorMod=$consultaValorMod->fetch(PDO::FETCH_ASSOC)){
           ?>
               <div class="col-sm-1"></div>
               <div class="col-sm-1" style="margin-top: 7px;"><?php if ($exibValorMod['status'] == 0) { ?><img src="./IMAGES/iconADD.png" width="70" alt=""> <?php } else { ?><img src="./IMAGES/iconRemover.png" width="70" alt=""><?php } ?></div>
-              <div class="col-sm-4" style="margin-top: 7px;"><h4 class="modoValor"><?= $exibValorMod['modo'] ?></h4><h4 class="obcervacaoValor"><?= $exibValorMod['obcervacao'] ?></h4></div>
-              <div class="col-sm-3" style="margin-top: 7px;"><h4><?= date('d/m/Y', strtotime($exibValorMod['data'])) ?></h4></div>
-              <div class="col-sm-2" style="margin-top: 7px;"><h4 class="precoValor">R$ <?= number_format($exibValorMod['valor'],2,",","."); ?></h4></div>
-              <div class="col-sm-1" style="margin-top: 7px;"></div>
+              <div class="col-sm-4" style="margin-top: 12px;"><h4 class="modoValor"><?= $exibValorMod['modo'] ?></h4><h4 class="obcervacaoValor" ><?= $exibValorMod['obcervacao'] ?></h4></div>
+              <div class="col-sm-3" style="margin-top: 12px;"><h4><?= date('d/m/Y', strtotime($exibValorMod['data'])) ?></h4></div>
+              <div class="col-sm-3" style="margin-top: 12px;"><h4 class="precoValor"><?php if ($exibValorMod['status'] == 1) { ?> - <?php } ?>R$ <?= number_format($exibValorMod['valor'],2,",","."); ?></h4></div>
 
          <?php } ?>
 

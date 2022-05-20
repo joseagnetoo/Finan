@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../COMPONENTS/conexao.php";
 
 $consultaValor=$conexao->query("SELECT valor FROM ValorAtual ORDER BY id DESC");
@@ -10,8 +11,8 @@ $modo = "Você Adicionou Dinheiro!";
 $data = date('Y-m-d');
 $obcervacao = $_POST['Obcervacao'];
 
-$inserir=$conexao->query("INSERT INTO ValorAtual (valor) VALUES ('$vlr')");
-$inserir=$conexao->query("INSERT INTO ValorMod (valor, modo, data, obcervacao, status) VALUES ('$valorMod', '$modo', '$data', '$obcervacao', '0')");
+$inserir=$conexao->query("INSERT INTO ValorAtual (id_user, valor) VALUES ('$_SESSION[id]','$vlr')");
+$inserir=$conexao->query("INSERT INTO ValorMod (id_user, valor, modo, data, obcervacao, status) VALUES ('$_SESSION[id]', '$valorMod', '$modo', '$data', '$obcervacao', '0')");
 
 header('location: ../index.php')
 ?>
