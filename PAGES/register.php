@@ -20,6 +20,7 @@
 <header>
 <?php
 session_start();
+include "../COMPONENTS/conexao.php";
 ?>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#"> <img src="./IMAGES/iconWallet.png" width="35" alt=""> FINAN</a>

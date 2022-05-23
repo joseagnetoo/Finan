@@ -19,7 +19,7 @@
 <?php
  session_start();
  if (empty($_SESSION['id'])){
-  header('location: ./PAGES/login.php');
+  //header('location: ./PAGES/login.php');
 }
  include "./COMPONENTS/conexao.php";
  $consultaValor=$conexao->query("SELECT valor FROM ValorAtual WHERE id_user = '$_SESSION[id]' ORDER BY id DESC");
